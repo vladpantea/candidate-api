@@ -1,0 +1,4 @@
+.env
+node_modules
+uploaded_cvs
+test/uploaded_test_cv
