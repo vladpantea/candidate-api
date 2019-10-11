@@ -28,7 +28,7 @@ const upload = multer({
 
         errorHelper.validate('Candidate', req.body, '', (err) => {
             if(err){
-                cb(new ValidationError(err.error.message));                
+                cb(new ValidationError(err.message));                
             }else{
                 cb(null, true);             
             }
@@ -61,4 +61,11 @@ router.delete('/:id', [validation("Candidate", "id")], asyncWrapper(async (req, 
     res.sendStatus(204);
 }));
 
-module.exports = router;
+const closeConnection = () => {
+    return candidatesService.mongoService.closeConnection()
+}
+
+module.exports = {
+    router: router,
+    connClose: closeConnection
+};

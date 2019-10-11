@@ -9,4 +9,4 @@ COPY . .
 RUN npm install --prod
 
 EXPOSE 5080
-CMD ["node", "server.js"]
+CMD ["node", "index.js"]
