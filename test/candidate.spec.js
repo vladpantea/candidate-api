@@ -14,6 +14,7 @@ let dbName = null
 let env = null
 const MONGODB_SERVER = '127.0.0.1'
 let candidate_id = null
+let ctrl = null
 
 describe('API TESTS', function () {
     before(async function () {
