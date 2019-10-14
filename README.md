@@ -7,9 +7,10 @@ Nodejs Express API written in node 12 + Dockerfile and deployment.yaml
 
 node server.js
 
-docker build -t candidate-api:v0.0.1 . 
+docker build -t candidate-api:v1.0.0 . 
 
-docker run -p 5080:5080 candidate-api:v0.0.1
+docker run -p 3000:3000 --env NODE_ENV=development --env PORT=3000 --env MONGODB_SERVER=127.0.0.1 --env MONGODB_SERVER_PORT=27017 --env MONGODB_DB=some_db --env MONGODB_DB_USER=some_user --env MONGODB_DB_PASS=password --env UPLOAD_FOLDER=some_folder_name candidate-api:v1.0.0
+
 
 kubectl apply -f deployment.yaml
 
