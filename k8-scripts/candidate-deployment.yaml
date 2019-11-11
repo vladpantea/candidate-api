@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: candidate-api
-        image: vladpantea/candidate-api:v1.0.0
+        image: vladpantea/candidate-api:v1.0.1
         ports:
         - name: app-port
           containerPort: 5080
