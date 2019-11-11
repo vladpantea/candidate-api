@@ -6,6 +6,8 @@ const chalk = require('chalk')
 const app = express()
 Middleware(app)
 
+const AliveController = require('./controllers/alive-controller')
+app.use('/', AliveController.router)
 const CandidatesController = require('./controllers/candidates-controller')
 app.use('/api/candidates', CandidatesController.router)
 

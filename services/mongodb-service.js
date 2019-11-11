@@ -18,8 +18,8 @@ module.exports = (async function () {
             return db;
         } else {
             url = await getUrl();
-            let _client = new MongoClient(url);
-            client = await _client.connect({ useNewUrlParser: true });
+            let _client = new MongoClient(url,{ useNewUrlParser: true , useUnifiedTopology: true});
+            client = await _client.connect();
             db = await client.db(process.env.MONGODB_DB);
             return db;
         }

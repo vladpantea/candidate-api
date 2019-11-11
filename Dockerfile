@@ -7,6 +7,4 @@ COPY . .
 # RUN apk add --no-cache make gcc g++ python
 
 RUN npm install --prod
-
-EXPOSE 5080
 CMD ["node", "index.js"]

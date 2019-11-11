@@ -1,0 +1,12 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: candidate-service
+spec:
+  type: NodePort
+  selector:
+    app: candidate-api    
+  ports:
+  - port: 5080
+    targetPort: 5080
+    protocol: TCP

@@ -1,0 +1,63 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: candidate-api
+  labels:
+    app: candidate-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: candidate-api
+  template:
+    metadata:
+      labels:
+        app: candidate-api
+    spec:
+      containers:
+      - name: candidate-api
+        image: vladpantea/candidate-api:v1.0.0
+        ports:
+        - name: app-port
+          containerPort: 5080
+        livenessProbe:
+          HttpGet:
+            path: /liveness
+            port: app-port          
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          HttpGet:
+            path: /readiness
+            port: app-port          
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        env:
+        # Define the environment variable
+        - name: PORT
+          value: "5080"
+        - name: UPLOAD_FOLDER
+          value: uploaded_cvs
+        - name: NODE_ENV
+          value: development
+        - name: MONGODB_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: candidate-secret
+              key: MONGODB_SERVER
+        - name: MONGODB_SERVER_PORT
+          valueFrom:
+            secretKeyRef:
+              name: candidate-secret
+              key: MONGODB_SERVER_PORT
+        - name: MONGODB_DB
+          valueFrom:
+            secretKeyRef:
+              name: candidate-secret
+              key: MONGODB_DB
+        - name: MONGODB_DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: candidate-secret
+              key: MONGODB_DB_PASS         
+        

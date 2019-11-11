@@ -1,0 +1,17 @@
+﻿###Run Secret sh
+###dos2unix file
+###run script with args
+###./run.sh arg1 arg2 arg3 wher arg1 = username | arg2 = password | arg3 = secret
+
+###Create resources
+kubectl create secret generic candidate-secret --from-literal=username=someuser --from-literal=password=123456 --from-literal=secret=somesecret
+kubectl create configmap candidate-configmap --from-literal=audience='Emailer.API' --from-literal=issuer='Auth.API'
+kubectl apply -f ./candidate-deployment.yaml
+kubectl apply -f ./candidate-service.yaml
+
+###debug
+###kubectl get svc
+NAME           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+candidate-service   NodePort    10.106.176.112   <none>        9098:30823/TCP    4s
+
+###postman => HTTP GET => http://<ip>:30823/api/candidates
