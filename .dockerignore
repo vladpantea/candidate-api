@@ -3,4 +3,7 @@ node_modules
 .env.sample
 .circleci
 .vscode
-.k8-scripts
+k8-scripts
+test
+.gitignore
+.dockerignore

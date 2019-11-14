@@ -13,7 +13,7 @@ docker run -p 3000:3000 --env NODE_ENV=development --env PORT=3000 --env MONGODB
 
 or run 
 
-./run.sh 127.0.0.1 27017 some_db some_user password
+./k8-scripts/run.sh 127.0.0.1 27017 some_db some_user password
 
 
 kubectl apply -f deployment.yaml
