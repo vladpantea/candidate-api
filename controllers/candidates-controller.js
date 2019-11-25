@@ -38,8 +38,7 @@ const upload = multer({
 
 const candidatesService = new CandidatesService()
 
-router.get('/', asyncWrapper(async (req, res) => {
-    throw new Error('Operation failed')
+router.get('/', asyncWrapper(async (req, res) => {    
     let candidates = await candidatesService.findAll()
     res.send(candidates)
 }))
