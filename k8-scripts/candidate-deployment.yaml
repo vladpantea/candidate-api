@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: candidate-api
-        image: vladpantea/candidate-api:v1.0.1
+        image: vladpantea/candidate-api:v1.0.2
         ports:
         - name: app-port
           containerPort: 5080
@@ -55,6 +55,11 @@ spec:
             secretKeyRef:
               name: candidate-secret
               key: MONGODB_DB
+        - name: MONGODB_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: candidate-secret
+              key: MONGODB_DB_USER
         - name: MONGODB_DB_PASS
           valueFrom:
             secretKeyRef:

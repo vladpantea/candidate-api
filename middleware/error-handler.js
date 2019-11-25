@@ -1,15 +1,28 @@
 const chalk = require('chalk')
 const { ValidationError, DBOperationError, FileUploadError } = require('../errors/errors')
+const { serializeError } = require('serialize-error')
 
 function errorLogger(err, req, res, next) {
-    if (process.env && process.env.NODE_ENV === 'test') {
-        console.log(chalk.red(err.message))
-    } else {
-        if (err && err.error && err.error.stack) {
-            console.log(chalk.red(err.error.stack))
-        } else if (err && err.message) {
-            console.log(chalk.red(err.message))
+    if(err){
+        if(err.message){
+            console.error(chalk.red(err.message))    
         }
+
+        if(err.stack){
+            console.error(chalk.red(err.stack))
+        }
+
+        if(err.error){
+            if(!err.message && err.error.message){
+                console.error(chalk.red(err.error.message))    
+            }
+
+            if(err.error.stack){
+                console.error(chalk.red(err.error.stack))
+            }
+        }
+    }else{
+        console.error(chalk.red(JSON.stringify(serializeError(err))))
     }
 
     next(err)

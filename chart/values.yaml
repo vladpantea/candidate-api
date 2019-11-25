@@ -1,0 +1,40 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+metadata:
+  name: candidate-api  
+    
+replicaCount: 1
+
+image:
+  repository: vladpantea/candidate-api
+  tag: v1.0.2
+  pullPolicy: IfNotPresent
+
+containerPort: 5080
+
+livenessProbe:
+  path: /liveness
+  initialDelaySeconds: 3
+  periodSeconds: 3
+
+readinessProbe:
+  path: /readiness
+  initialDelaySeconds: 3
+  periodSeconds: 3
+env:
+  uploadFolder: uploaded_cvs
+  nodeEnv: development
+
+secret:
+  name: candidate-secret
+  mongodbServer: MTI3LjAuMC4x
+  mongodbServerPort: MjcwMTc=
+  mongodbDatabaseName: dGVzdA==
+  mongodbDatabaseUser: dGVzdF91c2Vy
+  mongodbDatabasePassword: MTIzNDU2
+
+service:
+  name: candidate-service
+  type: ClusterIP
+  port: 5080
